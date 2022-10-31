@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import UserNotParticipant
 from config import *
 
-@Client.on_message(filters.private & filters.incoming & filters.group)
+@Client.on_message(filters.private & filters.incoming)
 async def forcesub(c, m):
     if FORCESUB == 'True':
         owner = await c.get_users(int(OWNER_ID))
