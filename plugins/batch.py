@@ -9,12 +9,43 @@ from config import ADMINS
 from pyrogram import Client, filters
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from helpers.get_movie import get_movies
+from helpers.send_movies import send_movie_pvt_handler
+from helpers.validate_query import validate_q
+from helpers.auto_delete import auto_delete
+from pyrogram import Client, filters
+from pyrogram.types import Message
+from config import *
+from translation import *
+import urllib.parse
 
 
 cancel_button = [[
     InlineKeyboardButton('Cancel 🔐', callback_data='cancel_process')
 ]
 ]
+
+
+def escape_url(str):
+    return urllib.parse.quote(str)
+
+
+@Client.on_message(filters.private & filters.text & filters.incoming)
+async def find_movies(c: Client, m:Message):
+    print(True)
+    try:
+        reply_markup = None
+        query = m.text
+        query = await validate_q(query)
+        if query and m.text:
+            reply_markup = await get_movies(query=query, m=m)
+            if reply_markup is None or reply_markup is False: 
+                await send_movie_pvt_handler(m=m, query=query, reply_markup=reply_markup)
+
+        reply_markup = reply_markup if reply_markup is not None else None
+        await auto_delete(m, reply_markup) 
+    except Exception as e:
+        print(e)
 
 @Client.on_message(filters.private & filters.command('batch'))
 async def batch(c, m):

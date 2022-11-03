@@ -1,17 +1,22 @@
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 API_ID = os.environ.get('API_ID')
 API_HASH = os.environ.get('API_HASH')
 BOT_TOKEN = os.environ.get('BOT_TOKEN')
 OWNER_ID = int(os.environ.get("OWNER_ID"))
-ADMINS = list(int(i) for i in os.environ.get("ADMINS", "").split(" ")) if os.environ.get("ADMINS") else []
+ADMINS = [int(i) for i in os.environ.get("ADMINS", "").split(" ")] if os.environ.get("ADMINS") else []
+
 if OWNER_ID not in ADMINS:
     ADMINS.append(OWNER_ID)
 MONGODB = os.environ.get('MONGODB')
-DATABASE_NAME = os.environ.get('DATABASE_NAME') 
+DATABASE_NAME = os.environ.get('DATABASE_NAME')
 COLLECTION_NAME = os.environ.get('COLLECTION_NAME')
 CHANNELS = os.environ.get('CHANNELS', "False")
-CHANNELS_LIST = list(int(i) for i in os.environ.get("CHANNELS_LIST", "").split(" ")) if os.environ.get("CHANNELS_LIST") else []
+CHANNELS_LIST = [int(i) for i in os.environ.get("CHANNELS_LIST", "").split(" ")] if os.environ.get("CHANNELS_LIST") else []
+
 FORCESUB = os.environ.get('FORCESUB', "False")
 
 # Other Settings

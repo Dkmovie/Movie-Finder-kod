@@ -7,7 +7,6 @@ from config import *
 from translation import *
 from plugins.callback import replace_username
 from bson.objectid import ObjectId
-from plugins.search_movies import escape_url
 from helpers.validate_query import validate_q
 from helpers.send_movies import send_movie_group_handler
 from helpers.get_movie import get_movies
@@ -18,15 +17,14 @@ async def group_handler(c: Client, m:Message):
     reply_markup = None
     query = m.text
     query = await validate_q(query)
-    if query:
-        if m.text:
-            reply_markup = await get_movies(query=query, m=m)
-            if reply_markup is None or reply_markup is False:
-                await send_movie_group_handler(m=m, query=query, reply_markup=reply_markup)
-    
+    if query and m.text:
+        reply_markup = await get_movies(query=query, m=m)
+        if reply_markup is None or reply_markup is False:
+            await send_movie_group_handler(m=m, query=query, reply_markup=reply_markup)
+
     reply_markup = reply_markup if reply_markup is not None else None
 
-    await auto_delete(m, reply_markup) 
+    await auto_delete(m, reply_markup)
     return
     
 
