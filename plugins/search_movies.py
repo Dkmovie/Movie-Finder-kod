@@ -11,19 +11,20 @@ from helpers.auto_delete import auto_delete
 
 @Client.on_message(filters.private & filters.text & filters.incoming & ~filters.command(['start', 'total']))
 async def find_movies(c: Client, m:Message):
-    reply_markup = None
-    query = m.text
-    query = await validate_q(query)
-    if query:
-        if m.text:
+
+    try:
+        reply_markup = None
+        query = m.text
+        query = await validate_q(query)
+        if query and m.text:
             reply_markup = await get_movies(query=query, m=m)
             if reply_markup is None or reply_markup is False: 
                 await send_movie_pvt_handler(m=m, query=query, reply_markup=reply_markup)
 
-    reply_markup = reply_markup if reply_markup is not None else None
-    await auto_delete(m, reply_markup) 
-
+        reply_markup = reply_markup if reply_markup is not None else None
+        await auto_delete(m, reply_markup) 
+    except Exception as e:
+        print(e)
     
 def escape_url(str):
-    escape_url = urllib.parse.quote(str)
-    return escape_url
+    return urllib.parse.quote(str)
