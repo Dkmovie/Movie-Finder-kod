@@ -32,7 +32,6 @@ def escape_url(str):
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def find_movies(c: Client, m:Message):
-    print(True)
     try:
         reply_markup = None
         query = m.text
