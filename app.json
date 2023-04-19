@@ -4,8 +4,8 @@
     "keywords": [
         "telegram"
     ],
-    "website": "https://github.com/kevinnadar22/All-Movie-Finder-Bot",
-    "repository": "https://github.com/kevinnadar22/All-Movie-Finder-Bot",
+    "website": "https://github.com/Dkmovie/Movie-Finder-kod",
+    "repository": "https://github.com/Dkmovie/Movie-Finder-kod",
     "env": {
         "BOT_TOKEN": {
             "description": "Your bot token",
@@ -96,7 +96,7 @@
     "formation": {
         "worker": {
             "quantity": 1,
-            "size": "free"
+            "size": "eco"
         }
     }
 }
