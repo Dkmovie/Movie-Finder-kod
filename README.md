@@ -63,7 +63,7 @@ python3 -m bot
 
 #### The Easy Way
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/hacker-bro-king/Movie-Finder-kod)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Dkmovie/Movie-Finder-kod)
 
 
 
